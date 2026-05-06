@@ -4,17 +4,10 @@ Advanced Python example demonstrating data analysis and visualization capabiliti
 Features: Data processing, statistics, and pattern detection.
 """
 
-from typing import List, Dict, Tuple
-import json
-from dataclasses import dataclass
+from typing import Dict, List
 
 
-@dataclass
-class DataPoint:
-    """Represents a single data point with metadata."""
-    value: float
-    label: str
-    timestamp: str
+__all__ = ["DataAnalyzer"]
 
 
 class DataAnalyzer:

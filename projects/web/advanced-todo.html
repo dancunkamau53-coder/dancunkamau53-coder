@@ -244,6 +244,13 @@
             padding: 40px 20px;
             color: #a0aec0;
         }
+
+        .error-message {
+            color: #c53030;
+            margin-bottom: 16px;
+            font-size: 0.95em;
+            min-height: 1.25rem;
+        }
         
         .empty-state svg {
             width: 60px;
@@ -272,13 +279,14 @@
                 <option value="medium" selected>Medium</option>
                 <option value="high">High</option>
             </select>
-            <button type="button" onclick="addTodo()">Add Task</button>
+            <button type="button" id="addButton">Add Task</button>
         </div>
+        <div id="errorMessage" class="error-message" aria-live="assertive" role="alert"></div>
         
-        <div class="filter-buttons">
-            <button type="button" class="filter-btn active" onclick="setFilter('all', event)">All</button>
-            <button type="button" class="filter-btn" onclick="setFilter('active', event)">Active</button>
-            <button type="button" class="filter-btn" onclick="setFilter('completed', event)">Completed</button>
+        <div class="filter-buttons" id="filterButtons">
+            <button type="button" class="filter-btn active" data-filter="all">All</button>
+            <button type="button" class="filter-btn" data-filter="active">Active</button>
+            <button type="button" class="filter-btn" data-filter="completed">Completed</button>
         </div>
         
         <div class="stats" aria-live="polite">
@@ -307,28 +315,36 @@
         let todos = JSON.parse(localStorage.getItem('todos')) || [];
         let currentFilter = 'all';
         
+        const input = document.getElementById('todoInput');
+        const prioritySelect = document.getElementById('prioritySelect');
+        const addButton = document.getElementById('addButton');
+        const errorMessage = document.getElementById('errorMessage');
+        const filterButtons = document.getElementById('filterButtons');
+        const todoList = document.getElementById('todoList');
+
         function addTodo() {
-            const input = document.getElementById('todoInput');
-            const priority = document.getElementById('prioritySelect').value;
-            
-            if (input.value.trim() === '') {
-                alert('Please enter a task!');
+            const text = input.value.trim();
+            const priority = prioritySelect.value;
+
+            if (!text) {
+                errorMessage.textContent = 'Please enter a task description.';
                 return;
             }
-            
+
             todos.push({
                 id: Date.now(),
-                text: input.value,
+                text,
                 completed: false,
-                priority: priority,
+                priority,
                 created: new Date().toLocaleDateString()
             });
-            
+
             input.value = '';
+            errorMessage.textContent = '';
             saveTodos();
             renderTodos();
         }
-        
+
         function toggleTodo(id) {
             const todo = todos.find(t => t.id === id);
             if (todo) {
@@ -337,19 +353,18 @@
                 renderTodos();
             }
         }
-        
+
         function deleteTodo(id) {
             todos = todos.filter(t => t.id !== id);
             saveTodos();
             renderTodos();
         }
-        
-        function setFilter(filter, event) {
+
+        function setFilter(filter) {
             currentFilter = filter;
-            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-            if (event && event.target) {
-                event.target.classList.add('active');
-            }
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.filter === filter);
+            });
             renderTodos();
         }
         
@@ -374,14 +389,15 @@
             list.innerHTML = filtered.map(todo => `
                 <li class="todo-item ${todo.completed ? 'completed' : ''}">
                     <input 
+                        class="todo-toggle"
                         type="checkbox" 
                         ${todo.completed ? 'checked' : ''} 
-                        onchange="toggleTodo(${todo.id})"
+                        data-id="${todo.id}"
                         aria-label="Toggle task completion"
                     >
                     <span class="todo-text">${escapeHtml(todo.text)}</span>
                     <span class="priority ${todo.priority}">${todo.priority}</span>
-                    <button class="delete-btn" type="button" onclick="deleteTodo(${todo.id})" aria-label="Delete task">Delete</button>
+                    <button class="delete-btn" type="button" data-id="${todo.id}" aria-label="Delete task">Delete</button>
                 </li>
             `).join('');
             
@@ -395,16 +411,42 @@
         
         function escapeHtml(text) {
             const map = {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'};
-            return text.replace(/[&<>"']/g, m => map[m]);
+            return String(text).replace(/[&<>"']/g, m => map[m]);
         }
         
-        // Keyboard support
-        document.getElementById('todoInput').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') addTodo();
-        });
-        
-        // Initial render
-        renderTodos();
+        function initializeApp() {
+            addButton.addEventListener('click', addTodo);
+            filterButtons.addEventListener('click', (event) => {
+                const button = event.target.closest('.filter-btn');
+                if (button && button.dataset.filter) {
+                    setFilter(button.dataset.filter);
+                }
+            });
+            todoList.addEventListener('click', (event) => {
+                if (event.target.matches('.delete-btn')) {
+                    deleteTodo(Number(event.target.dataset.id));
+                }
+            });
+            todoList.addEventListener('change', (event) => {
+                if (event.target.matches('.todo-toggle')) {
+                    toggleTodo(Number(event.target.dataset.id));
+                }
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    addTodo();
+                }
+            });
+            input.addEventListener('input', () => {
+                if (errorMessage.textContent) {
+                    errorMessage.textContent = '';
+                }
+            });
+            renderTodos();
+        }
+
+        initializeApp();
     </script>
 </body>
 </html>
