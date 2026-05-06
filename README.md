@@ -36,7 +36,16 @@ I'm currently learning Git & GitHub with a strong interest in tech and problem-s
 ### Learning Resources
 - **[Markdown Practice](./markdown-practice.md)** - Comprehensive markdown formatting examples covering all 8 essential exercises
 - **[Portfolio Website](./index.html)** - Modern portfolio with responsive design and smooth animations
+## 🧪 Tests
 
+A unit test suite is included for the Python data analyzer. Run it from the `projects/python` folder:
+
+```bash
+cd projects/python
+python -m unittest test_data_analyzer.py
+```
+
+The analyzer includes robust handling for empty datasets and outlier detection using the IQR method.
 ## 📊 GitHub Stats
 
 <a href="https://github.com/dancunkamau53-coder">

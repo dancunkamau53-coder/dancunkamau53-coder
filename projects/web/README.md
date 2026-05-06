@@ -40,6 +40,7 @@ A full-featured task management application demonstrating:
 - Visual priority indicators
 - Smooth hover and transition effects
 - XSS protection for user input
+- Improved accessibility with ARIA live regions and keyboard support
 
 ## Learning Outcomes
 

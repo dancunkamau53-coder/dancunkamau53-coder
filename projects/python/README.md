@@ -46,6 +46,15 @@ Outliers: [1000]
 ==================================================
 ```
 
+## Testing
+
+Run the included unit tests for data analysis logic:
+
+```bash
+cd projects/python
+python -m unittest test_data_analyzer.py
+```
+
 ## Learning Outcomes
 
 By studying these projects, you'll learn:

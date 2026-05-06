@@ -36,6 +36,8 @@ class DataAnalyzer:
     
     def median(self) -> float:
         """Calculate the median value."""
+        if not self.sorted_data:
+            return 0
         n = len(self.sorted_data)
         if n % 2 == 0:
             return (self.sorted_data[n // 2 - 1] + self.sorted_data[n // 2]) / 2
@@ -51,6 +53,9 @@ class DataAnalyzer:
     
     def quartiles(self) -> Dict[str, float]:
         """Calculate Q1, Q2 (median), and Q3."""
+        if not self.sorted_data:
+            return {"Q1": 0, "Q2": 0, "Q3": 0}
+
         def percentile(p: float) -> float:
             index = (p / 100) * (len(self.sorted_data) - 1)
             lower = int(index)
@@ -76,6 +81,8 @@ class DataAnalyzer:
         Returns:
             List of outlier values
         """
+        if not self.data:
+            return []
         q = self.quartiles()
         iqr = q["Q3"] - q["Q1"]
         lower_bound = q["Q1"] - threshold * iqr
