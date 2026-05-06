@@ -5,158 +5,386 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daniel Kamau - Portfolio</title>
     <style>
+        :root {
+            --bg-primary: radial-gradient(circle at top, #8e94ff 0%, #5b4cb2 35%, #2b1e73 100%);
+            --bg-secondary: rgba(255, 255, 255, 0.96);
+            --text-primary: #222;
+            --text-secondary: #4f5e79;
+            --accent: #3e4deb;
+            --accent-light: #eef2ff;
+            --card-bg: #f8f9ff;
+            --border: #e1e4ff;
+            --shadow: rgba(0, 0, 0, 0.22);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: radial-gradient(circle at top, #1a1a2e 0%, #16213e 35%, #0f0f23 100%);
+            --bg-secondary: rgba(30, 30, 46, 0.96);
+            --text-primary: #e2e8f0;
+            --text-secondary: #a0aec0;
+            --accent: #6366f1;
+            --accent-light: #1e293b;
+            --card-bg: #1e293b;
+            --border: #334155;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-primary);
+            background: var(--bg-primary);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            max-width: 600px;
-            padding: 40px;
-        }
-        
-        h1 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 2.5em;
-        }
-        
-        .subtitle {
-            color: #666;
-            font-size: 1.1em;
-            margin-bottom: 30px;
-        }
-        
-        .section {
-            margin: 30px 0;
-        }
-        
-        .section h2 {
-            color: #764ba2;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 10px;
-        }
-        
-        ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        
-        ul li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        ul li:before {
-            content: "▸";
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-weight: bold;
-        }
-        
-        .links {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-        
-        .links a {
-            display: inline-block;
-            padding: 10px 20px;
-            background: #667eea;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
             transition: background 0.3s ease;
         }
-        
-        .links a:hover {
-            background: #764ba2;
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--bg-secondary);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 15px 25px;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
-        
-        .email {
-            background: #f0f0f0;
-            padding: 15px;
-            border-left: 4px solid #667eea;
-            border-radius: 5px;
-            margin-top: 20px;
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
         }
-        
-        .email a {
-            color: #667eea;
+
+        .nav-links a {
+            color: var(--text-primary);
             text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
-        
-        .email a:hover {
-            text-decoration: underline;
+
+        .nav-links a:hover {
+            color: var(--accent);
         }
-        
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .container {
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            box-shadow: 0 24px 70px var(--shadow);
+            width: min(100%, 900px);
+            padding: 40px;
+            margin: 100px auto 25px;
+            backdrop-filter: blur(10px);
+            transition: background 0.3s ease;
+        }
+
+        header {
+            display: grid;
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+
+        .hero-title {
+            color: var(--accent);
+            font-size: clamp(2.2rem, 4vw, 3.4rem);
+            letter-spacing: -0.04em;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            max-width: 760px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 10px 16px;
+            border-radius: 999px;
+            font-weight: 600;
+            width: fit-content;
+        }
+
+        .section {
+            margin-bottom: 32px;
+        }
+
+        .section h2 {
+            color: var(--accent);
+            font-size: 1.45rem;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .grid {
+            display: grid;
+            gap: 18px;
+        }
+
+        .skills-grid,
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 14px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            min-height: 100px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        .card strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        ul {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+        }
+
+        li {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+        }
+
+        li::before {
+            content: '•';
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--accent) 0%, #5b4cb2 100%);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 999px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .links a:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 30px rgba(59, 67, 167, 0.2);
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px;
+        }
+
+        .contact-card a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .contact-form button {
+            padding: 12px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background: #5b4cb2;
+        }
+
         footer {
             text-align: center;
-            margin-top: 40px;
-            color: #999;
-            font-size: 0.9em;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
+            margin-top: 15px;
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 24px;
+                margin-top: 80px;
+            }
+
+            .nav {
+                padding: 10px 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .links {
+                flex-direction: column;
+                align-items: stretch;
+            }
         }
     </style>
 </head>
 <body>
+    <nav class="nav">
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+    </nav>
+
     <div class="container">
-        <h1>Daniel Kamau</h1>
-        <p class="subtitle">Aspiring Developer | Tech Enthusiast | Problem Solver</p>
-        
-        <div class="section">
+        <header>
+            <span class="badge">Portfolio</span>
+            <h1 class="hero-title">Hi, I’m Daniel Kamau.</h1>
+            <p class="subtitle">I build strong foundations in web development and Python, and I’m working to turn ideas into polished projects you can share with the world.</p>
+        </header>
+
+        <section id="about" class="section">
             <h2>About Me</h2>
-            <p>I'm currently learning Git & GitHub with a passion for technology and problem-solving. I'm eager to collaborate on open source projects and build meaningful applications that make a difference.</p>
-        </div>
-        
-        <div class="section">
-            <h2>Skills I'm Building</h2>
-            <ul>
-                <li>Git and GitHub</li>
-                <li>Python</li>
-                <li>HTML/CSS</li>
-                <li>Machine Learning</li>
-            </ul>
-        </div>
-        
-        <div class="section">
-            <h2>Connect With Me</h2>
-            <div class="links">
-                <a href="https://github.com/dancunkamau53-coder" target="_blank">GitHub Profile</a>
-                <a href="https://github.com/dancunkamau53-coder?tab=repositories" target="_blank">View Repositories</a>
+            <p>I am a developer focused on web technologies, version control, and practical problem solving. I enjoy learning by building small apps, exploring new tools, and contributing to projects that sharpen my skills.</p>
+        </section>
+
+        <section class="section grid">
+            <div class="card">
+                <strong>What I’m learning</strong>
+                <ul>
+                    <li>Git & GitHub</li>
+                    <li>Python scripting</li>
+                    <li>HTML, CSS & responsive design</li>
+                    <li>Machine Learning concepts</li>
+                </ul>
             </div>
-            
-            <div class="email">
-                <strong>Email:</strong> <a href="mailto:mudash254@gmail.com">mudash254@gmail.com</a>
+            <div class="card">
+                <strong>What I enjoy</strong>
+                <ul>
+                    <li>Building user-friendly pages</li>
+                    <li>Solving coding challenges</li>
+                    <li>Exploring open source</li>
+                    <li>Sharing clean, readable code</li>
+                </ul>
             </div>
-        </div>
-        
+        </section>
+
+        <section id="projects" class="section">
+            <h2>Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="card">
+                    <strong>Advanced Todo App</strong>
+                    <p>A responsive task manager with priority tags, filters, and local storage support.</p>
+                    <a href="projects/web/advanced-todo.html" class="links">Open app</a>
+                </div>
+                <div class="card">
+                    <strong>GitHub Portfolio</strong>
+                    <p>View the latest repositories, projects, and code examples on GitHub.</p>
+                    <a href="https://github.com/dancunkamau53-coder" target="_blank" class="links">Visit GitHub</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-card">
+            <h2>Contact</h2>
+            <p>Let’s connect about projects, learning, or collaboration.</p>
+            <p><a href="mailto:mudash254@gmail.com">mudash254@gmail.com</a></p>
+            <form class="contact-form" action="mailto:mudash254@gmail.com" method="post" enctype="text/plain">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+
         <footer>
-            <p>&copy; 2026 Daniel Kamau. All rights reserved.</p>
+            <p>&copy; 2026 Daniel Kamau. Built with HTML and CSS.</p>
         </footer>
     </div>
-</body>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon();
+        }
+
+        function updateThemeIcon() {
+            const theme = document.body.getAttribute('data-theme');
+            const toggle = document.querySelector('.theme-toggle');
+            toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        updateThemeIcon();
+    </script>
 </html>
