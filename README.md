@@ -1,63 +1,56 @@
-# Hi I'm Daniel Kamau
+# Daniel Kamau
 
-[![GitHub followers](https://img.shields.io/github/followers/dancunkamau53-coder?style=social)](https://github.com/dancunkamau53-coder)
-[![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python&logoColor=white)](https://www.python.org/)
-[![HTML5](https://img.shields.io/badge/HTML5-orange?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
-[![CSS3](https://img.shields.io/badge/CSS3-blue?logo=css3&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/CSS)
-[![JavaScript](https://img.shields.io/badge/JavaScript-yellow?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![Git](https://img.shields.io/badge/Git-red?logo=git&logoColor=white)](https://git-scm.com/)
-[![GitHub](https://img.shields.io/badge/GitHub-blue?logo=github&logoColor=white)](https://github.com/dancunkamau53-coder)
+Software developer specializing in web applications and data-driven Python solutions. I deliver reliable, maintainable projects with a focus on usability, performance, and professional documentation.
 
-Welcome to my GitHub profile! I'm a passionate developer and tech enthusiast eager to grow my skills and contribute to meaningful projects.
+## Summary
 
-## About Me
+I create responsive user experiences and data analysis tools using modern web standards and Python best practices. My projects emphasize clean code, structured workflows, and clear technical communication.
 
-I'm currently learning Git & GitHub with a strong interest in tech and problem-solving. I'm actively looking to collaborate on open source projects and build applications that make a difference.
+## Featured Work
 
-## Skills I'm Building
+### Python
+- **Data Analyzer** (`./projects/python/data_analyzer.py`)
+  - Provides descriptive statistics, quartile analysis, and outlier detection
+  - Includes validation for empty datasets and unit coverage
 
-- **Git and GitHub** - Version control and collaboration workflows
-- **Python** - Programming fundamentals and scripting
-- **HTML/CSS** - Web design and frontend development
-- **Machine Learning** - Data science and AI concepts
+### Web
+- **Advanced Todo App** (`./projects/web/advanced-todo.html`)
+  - Responsive task manager with priority filtering and local persistence
+  - Includes accessibility improvements and clean interface design
 
-## 🚀 Featured Projects
+### Portfolio
+- **Personal website** (`./index.html`)
+  - Professional showcase of projects, skills, and contact information
 
-### Python Development
-- **[Data Analyzer](./projects/python/data_analyzer.py)** - Advanced statistical analysis tool with outlier detection, quartile calculations, and comprehensive reporting
-  - Features: OOP design, type hints, statistical methods
-  - Technologies: Python 3.8+, Dataclasses, Advanced algorithms
+## Documentation
 
-### Web Development
-- **[Advanced Todo App](./projects/web/advanced-todo.html)** - Full-featured task management application with priority levels and persistence
-  - Features: Responsive UI, LocalStorage, real-time statistics, accessibility
-  - Technologies: HTML5, CSS3, Vanilla JavaScript
+- `./projects/python/README.md`
+- `./projects/web/README.md`
+- `./markdown-practice.md`
 
-### Learning Resources
-- **[Markdown Practice](./markdown-practice.md)** - Comprehensive markdown formatting examples covering all 8 essential exercises
-- **[Portfolio Website](./index.html)** - Modern portfolio with responsive design and smooth animations
-## 🧪 Tests
+## Skills
 
-A unit test suite is included for the Python data analyzer. Run it from the `projects/python` folder:
+- Python
+- HTML5, CSS3, JavaScript
+- Responsive design
+- Accessibility and usability
+- Git and GitHub
+
+## Testing
+
+A unit test suite is included for the Python analyzer. Run it from the `projects/python` folder:
 
 ```bash
 cd projects/python
 python -m unittest test_data_analyzer.py
 ```
 
-The analyzer includes robust handling for empty datasets and outlier detection using the IQR method.
-## 📊 GitHub Stats
+## Contact
 
-<a href="https://github.com/dancunkamau53-coder">
-  <img align="center" height="180em" src="https://github-readme-stats.vercel.app/api?username=dancunkamau53-coder&show_icons=true&theme=radical" />
-</a>
+Email: [mudash254@gmail.com](mailto:mudash254@gmail.com)
 
-## How to Reach Me
-
-📧 Email: [mudash254@gmail.com](mailto:mudash254@gmail.com)
-
-🔗 GitHub: [github.com/dancunkamau53-coder](https://github.com/dancunkamau53-coder)
+GitHub: [github.com/dancunkamau53-coder](https://github.com/dancunkamau53-coder)
 
 ---
 
-**Last Updated:** May 2026
+**Last updated:** May 2026
