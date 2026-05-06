@@ -15,6 +15,8 @@ If you want to use this repository (`dancunkamau53-coder`) for GitHub Pages:
 3. Click "Save"
 4. Your site will be published at: `https://dancunkamau53-coder.github.io`
 
+> This repository now includes a GitHub Actions workflow at `.github/workflows/pages.yml` to deploy the root site automatically whenever `main` is updated.
+
 ### Option 2: Create a Dedicated Pages Repository (Recommended)
 
 For a proper user page, create a separate repository:
