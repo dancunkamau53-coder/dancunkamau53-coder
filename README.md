@@ -53,6 +53,18 @@ cd projects/python
 python -m unittest test_data_analyzer.py
 ```
 
+## Contact Form Setup
+
+The portfolio includes a contact form that sends emails using EmailJS. To set it up:
+
+1. Sign up at [EmailJS](https://www.emailjs.com/)
+2. Create a new email service (Gmail, Outlook, etc.)
+3. Create an email template with variables: `{{from_name}}`, `{{from_email}}`, `{{message}}`
+4. Update `index.html` with your credentials:
+   - Replace `YOUR_PUBLIC_KEY` with your EmailJS public key
+   - Replace `YOUR_SERVICE_ID` with your service ID
+   - Replace `YOUR_TEMPLATE_ID` with your template ID
+
 ## Contact
 
 Email: [mudash254@gmail.com](mailto:mudash254@gmail.com)

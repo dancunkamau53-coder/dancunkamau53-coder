@@ -6,6 +6,7 @@
     <meta name="description" content="Portfolio of Daniel Kamau, software developer building modern web and Python applications.">
     <meta name="author" content="Daniel Kamau">
     <title>Daniel Kamau - Portfolio</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         :root {
             --bg-primary: radial-gradient(circle at top, #8e94ff 0%, #5b4cb2 35%, #2b1e73 100%);
@@ -356,6 +357,13 @@
             <p>For collaboration, project inquiries, or professional opportunities, reach out by email or visit my GitHub profile.</p>
             <p><a href="mailto:mudash254@gmail.com">mudash254@gmail.com</a></p>
             <p><a href="https://github.com/dancunkamau53-coder" target="_blank" rel="noopener noreferrer">github.com/dancunkamau53-coder</a></p>
+            <form id="contactForm" class="contact-form">
+                <input type="text" id="name" name="from_name" placeholder="Your Name" required>
+                <input type="email" id="email" name="from_email" placeholder="Your Email" required>
+                <textarea id="message" name="message" placeholder="Your Message" rows="4" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+            <div id="formStatus" style="margin-top: 10px; display: none;"></div>
         </section>
 
         <footer>
@@ -364,6 +372,11 @@
     </main>
 
     <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+        })();
+
         function toggleTheme() {
             const body = document.body;
             const currentTheme = body.getAttribute('data-theme');
@@ -383,5 +396,26 @@
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.body.setAttribute('data-theme', savedTheme);
         updateThemeIcon();
+
+        // Handle contact form submission
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formStatus = document.getElementById('formStatus');
+            formStatus.style.display = 'block';
+            formStatus.textContent = 'Sending...';
+            formStatus.style.color = '#3e4deb';
+
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
+                .then(function() {
+                    formStatus.textContent = 'Message sent successfully!';
+                    formStatus.style.color = '#48bb78';
+                    document.getElementById('contactForm').reset();
+                }, function(error) {
+                    formStatus.textContent = 'Failed to send message. Please try again.';
+                    formStatus.style.color = '#f56565';
+                    console.error('EmailJS error:', error);
+                });
+        });
     </script>
 </html>
